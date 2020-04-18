@@ -8,19 +8,16 @@ class App extends Component {
     persons : [
       { name: "Sali", age: 33}, 
       { name: "Iesh", age: 28}, 
-      { name: "Aaray", age: 5}
+      { name: "Aradhya", age: 5}
     ],
     showPersons : false
   };
 
-  switchNameHandler = (newName) => {
-    
+  deletePersonHandler = (personIndex) => {
+    const persons = this.state.persons;
+    persons.splice(personIndex, 1);
     this.setState({
-      persons : [
-        { name: newName, age: 33}, 
-        { name: "Iesh", age: 32}, 
-        { name: "Aaray", age: 5}
-      ]
+      persons: persons
     });
   }
 
@@ -57,17 +54,13 @@ class App extends Component {
     if(this.state.showPersons){
       persons = (
         <div>
-            <Person name={this.state.persons[0].name} 
-                    age={this.state.persons[0].age}/>
-
-            <Person name={this.state.persons[1].name} 
-                    age={this.state.persons[1].age}
-                    click={this.switchNameHandler.bind(this, "Adnilas")}
-                    change={this.nameChangedHandler}>
-                      My Hobbie is cricket
-            </Person>
-            <Person name={this.state.persons[2].name} age={this.state.persons[2].age}/>
-          </div> 
+          {this.state.persons.map( (person, index) => {
+            return <Person 
+              click={ () => this.deletePersonHandler(index)}
+              name={person.name} 
+              age={person.age}/>
+          })}        
+        </div> 
       );
     }
 
@@ -82,8 +75,6 @@ class App extends Component {
         {persons}         
       </div>      
     );
-
-    // return React.createElement('div', null, React.createElement('h1', null, 'Does it work'));
   }
 }
 
