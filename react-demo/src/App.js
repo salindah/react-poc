@@ -6,29 +6,34 @@ class App extends Component {
 
   state = {
     persons : [
-      { name: "Sali", age: 33}, 
-      { name: "Iesh", age: 28}, 
-      { name: "Aradhya", age: 5}
+      { id: "21312312", name: "Sali", age: 33}, 
+      { id: "34534534", name: "Iesh", age: 28}, 
+      { id: "67675656", name: "Aradhya", age: 5},
+      { id: "12122222", name: "Aarya", age: 1}
     ],
     showPersons : false
   };
 
+  nameChangedHandler = (event, id) => {    
+    const personIndex = this.state.persons.findIndex( p => {
+      return p.id === id;
+    });
+
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+    person.name = event.target.value;
+    
+    const personsUpdated = [ ...this.state.persons];
+    personsUpdated[personIndex] = person;
+    this.setState({ persons: personsUpdated});
+  }
+
   deletePersonHandler = (personIndex) => {
-    const persons = this.state.persons;
+    const persons =  [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({
       persons: persons
-    });
-  }
-
-  nameChangedHandler = (event) => {
-    
-    this.setState({
-      persons : [
-        { name: "Sali", age: 33}, 
-        { name: event.target.value, age: 32}, 
-        { name: "Aaray", age: 5}
-      ]
     });
   }
 
@@ -42,7 +47,8 @@ class App extends Component {
   render() {
 
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -58,16 +64,21 @@ class App extends Component {
             return <Person 
               click={ () => this.deletePersonHandler(index)}
               name={person.name} 
-              age={person.age}/>
+              age={person.age}
+              key={person.id}
+              change={(event) => this.nameChangedHandler(event, person.id)}/>
           })}        
         </div> 
       );
+
+      style.backgroundColor = 'red';
     }
 
+    let classes = ['red', 'bold'].join(' ');
     return (
       <div className="App">
         <h1>Hi I am a react app</h1>
-        <p>This is really working</p>
+        <p className={classes}>This is really working</p>
         <button
           style={style} 
           onClick={this.togglePersonsHandler}>Toggle Persons
