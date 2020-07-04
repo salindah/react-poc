@@ -18,6 +18,7 @@ const cockpit = (props) => {
         assignedClasses.push(classes.bold);
     }
 
+    //Test commit
     return(
         <div className={classes.Cockpit}>
             <h1>Hi I am a react app</h1>
