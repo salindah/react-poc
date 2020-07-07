@@ -9,9 +9,14 @@ class Persons extends Component {
         return state
     }
 
-    shouldComponentUpdate() {
-        console.log('[Persons.js] shouldComponentUpdate');
-        return true;
+    shouldComponentUpdate(nextProps, nextState) {
+
+        if( nextProps.persons !== this.props.persons){
+            console.log('[Persons.js] shouldComponentUpdate');
+            return true;
+        } else {
+            return false;
+        }
     }
 
     getSnapshotBeforeUpdate() {
@@ -24,6 +29,9 @@ class Persons extends Component {
         console.log(snapshot);
     }
 
+    componentWillUnmount(){
+        console.log('[Persons.js] componentWillUnmount');
+    }
 
     render() {
         console.log('[Persons.js] Render');
