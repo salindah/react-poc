@@ -37,7 +37,6 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     console.log('[App.js] componentDidUpdate');
-    console.log(snapshot);
   }
 
   nameChangedHandler = (event, id) => {
@@ -90,7 +89,7 @@ class App extends Component {
         {this.state.showCockpit ? (
           <Cockpit
             showPersons={this.state.showPersons}
-            persons={this.state.persons}
+            personsLength={this.state.persons.length}
             clicked={this.togglePersonsHandler} />)
           : null}
 
