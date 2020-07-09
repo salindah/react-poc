@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import withClass from '../containers/hoc/withClass';
 
 class App extends Component {
 
@@ -18,7 +19,8 @@ class App extends Component {
       { id: "12122222", name: "Aarya", age: 1 }
     ],
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    changeCount: 0
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -99,4 +101,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default  withClass(App, classes.App);
