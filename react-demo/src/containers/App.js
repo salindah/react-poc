@@ -53,7 +53,12 @@ class App extends Component {
 
     const personsUpdated = [...this.state.persons];
     personsUpdated[personIndex] = person;
-    this.setState({ persons: personsUpdated });
+    this.setState((prevState, props) => {
+      return {
+        persons: personsUpdated,
+        changeCount: prevState.changeCount + 1
+      }
+    });
   }
 
   deletePersonHandler = (personIndex) => {
@@ -85,8 +90,8 @@ class App extends Component {
       <div className={classes.App}>
 
         <button onClick={() => {
-            this.setState({ showCockpit: false });
-          }} >Remove Cockpit</button>
+          this.setState({ showCockpit: false });
+        }} >Remove Cockpit</button>
 
         {this.state.showCockpit ? (
           <Cockpit
@@ -101,4 +106,4 @@ class App extends Component {
   }
 }
 
-export default  withClass(App, classes.App);
+export default withClass(App, classes.App);
